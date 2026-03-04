@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="utf-8" />
+<title>Масир Исфара → Хуҷанд</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: #f4f4f4;
+    }
+
+    h1 {
+        margin: 15px;
+    }
+
+    #map {
+        height: 500px;
+        width: 95%;
+        margin: auto;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+</style>
+</head>
+<body>
+
+<h1>Масир аз Исфара то Хуҷанд</h1>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+<script>
+
+var map = L.map('map').setView([40.20, 70.10], 9);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+L.Routing.control({
+    waypoints: [
+        L.latLng(40.1265, 70.6253),  // Исфара
+        L.latLng(40.2826, 69.6222)   // Хуҷанд
+    ],
+    routeWhileDragging: false,
+    lineOptions: {
+        styles: [{color: 'blue', weight: 6}]
+    },
+    createMarker: function(i, wp) {
+        return L.marker(wp.latLng)
+            .bindPopup(i === 0 ? "Оғоз: Исфара" : "Анҷом: Хуҷанд");
+    }
+}).addTo(map);
+
+</script>
+
+</body>
+</html>
